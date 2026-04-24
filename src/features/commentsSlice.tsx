@@ -5,13 +5,13 @@ import { Comment } from '../types/Comment';
 import { getPostComments } from '../api/comments';
 
 type CommentsState = {
-  comments: Comment[];
+  items: Comment[];
   loaded: boolean;
   hasError: boolean;
 };
 
 const initialState: CommentsState = {
-  comments: [],
+  items: [],
   loaded: false,
   hasError: false,
 };
@@ -30,10 +30,10 @@ export const commentsSlice = createSlice({
   initialState,
   reducers: {
     addNewComment: (state, action) => {
-      state.comments.push(action.payload);
+      state.items.push(action.payload);
     },
     removeComment: (state, action) => {
-      state.comments = state.comments.filter(
+      state.items = state.items.filter(
         item => item.id !== action.payload,
       );
     },
@@ -41,7 +41,7 @@ export const commentsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(loadComments.fulfilled, (state, action) => {
-        state.comments = action.payload;
+        state.items = action.payload;
         state.loaded = true;
         state.hasError = false;
       })

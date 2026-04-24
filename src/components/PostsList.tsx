@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 export const PostsList = () => {
   const dispatch = useDispatch();
-  const { posts } = useAppSelector(state => state.posts);
+  const { items } = useAppSelector(state => state.posts);
   const selectedPost = useAppSelector(state => state.selectedPost);
 
   return (
@@ -24,7 +24,7 @@ export const PostsList = () => {
         </thead>
 
         <tbody>
-          {posts.map(post => (
+          {items.map(post => (
             <tr key={post.id} data-cy="Post">
               <td data-cy="PostId">{post.id}</td>
               <td data-cy="PostTitle">{post.title}</td>

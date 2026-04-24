@@ -13,11 +13,12 @@ import { useAppDispatch, useAppSelector } from './app/hooks';
 import { getUsers } from './api/users';
 import { setUsers } from './features/usersSlice';
 import { loadUserPosts } from './features/postsSlice';
+import { setSelectedPost } from './features/selectedPostSlice';
 
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const author = useAppSelector(state => state.author);
-  const { posts, loaded, hasError } = useAppSelector(state => state.posts);
+  const { items, loaded, hasError } = useAppSelector(state => state.posts);
   const selectedPost = useAppSelector(state => state.selectedPost);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export const App: React.FC = () => {
     if (!author) {
       return;
     }
-
+    dispatch(setSelectedPost(null))
     dispatch(loadUserPosts(author.id));
   }, [author]);
 
@@ -56,13 +57,13 @@ export const App: React.FC = () => {
                   </div>
                 )}
 
-                {author && loaded && !hasError && posts.length === 0 && (
+                {author && loaded && !hasError && items.length === 0 && (
                   <div className="notification is-warning" data-cy="NoPostsYet">
                     No posts yet
                   </div>
                 )}
 
-                {author && loaded && !hasError && posts.length > 0 && (
+                {author && loaded && !hasError && items.length > 0 && (
                   <PostsList />
                 )}
               </div>
