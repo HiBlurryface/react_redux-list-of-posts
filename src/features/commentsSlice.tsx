@@ -33,9 +33,7 @@ export const commentsSlice = createSlice({
       state.items.push(action.payload);
     },
     removeComment: (state, action) => {
-      state.items = state.items.filter(
-        item => item.id !== action.payload,
-      );
+      state.items = state.items.filter(item => item.id !== action.payload);
     },
   },
   extraReducers: builder => {

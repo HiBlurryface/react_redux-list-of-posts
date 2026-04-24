@@ -29,7 +29,8 @@ export const App: React.FC = () => {
     if (!author) {
       return;
     }
-    dispatch(setSelectedPost(null))
+
+    dispatch(setSelectedPost(null));
     dispatch(loadUserPosts(author.id));
   }, [author]);
 
